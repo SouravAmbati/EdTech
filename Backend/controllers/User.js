@@ -2,7 +2,7 @@ import userModel from "../models/user.model.js";
 import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { gemini, roadmap } from "../services/gemini.js";
+import { gemini, guide, roadmap } from "../services/gemini.js";
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
@@ -165,6 +165,20 @@ const projectAi = async (req, res) => {
   }
 };
 
+const GuideAi=async(req,res)=>{
+  try {
+    const {data}=req.body;
+    if(!data){
+      return res.json({message:"Data is not being Passed"})
+    }
+    const answer=await guide(data);
+    // return res.json({answer});
+    return res.json({ projects: answer});
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // export { Registeruser, Loginuser, RegisterSkills, getRegisterSkills, SendAi  };
 export {
   Registeruser,
@@ -173,4 +187,5 @@ export {
   getRegisterSkills,
   SendAi,
   projectAi,
+  GuideAi
 };

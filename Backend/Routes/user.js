@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getRegisterSkills,
+  GuideAi,
   Loginuser,
   projectAi,
   RegisterSkills,
@@ -20,7 +21,7 @@ userRouter.post("/login", Loginuser);
 userRouter.get("/skills", getRegisterSkills);
 userRouter.post("/roadmap", SendAi);
 userRouter.post("/project",projectAi);
-// userRouter.post("/inBrief",brief);
+userRouter.post("/inBrief",GuideAi);
 
 export default userRouter;
 

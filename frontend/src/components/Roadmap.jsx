@@ -31,7 +31,7 @@ const Roadmap = () => {
     <div className="min-h-screen bg-[#D9D9D9] p-4">
       <div className=''>
         <h1 className='text-xl lg:text-3xl text-center mb-4 font-bold'>Roadmap for {localStorage.getItem('skills')}</h1>
-        <Link to='/project'><p className='ml-[1400px] mb-2'>Next</p></Link>
+        <Link to='/project'><p className='ml-[1400px] mb-2 text-xl lg:text-2xl'>➡Next</p></Link>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4">

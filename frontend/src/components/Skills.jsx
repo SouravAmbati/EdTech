@@ -44,8 +44,9 @@ const Skills = () => {
                 value={skill}
                 onChange={handleChange}
                 placeholder="Full-Stack Development"
+                className='border-1 p-3 rounded-md inline-block m-5'
             />
-            <button type="submit">Submit Skill</button>
+            <button type="submit" className='border-1 bg-green-200 rounded-md p-1'>Submit Skill</button>
         </form>
     );
 };

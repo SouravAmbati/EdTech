@@ -26,6 +26,14 @@ const gemini = async (content) => {
   };
   
 
+  const guide=async(content)=>{
+    const response=await ai.models.generateContent({
+      model:"gemini-2.0-flash",
+      contents:`Write A Step By Step Breif Guide To Make This ${content}project. Only output the step-by-step guide. No introductions or conclusions.`
+    })
+    return response.text
+  }
+
 
   const roadmap=async(content)=>{
     const response = await ai.models.generateContent({
@@ -99,5 +107,6 @@ const gemini = async (content) => {
 //   }
 export {
     roadmap,
-    gemini
+    gemini,
+    guide
 }
