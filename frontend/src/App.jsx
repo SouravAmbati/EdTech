@@ -5,6 +5,9 @@ import Register from './components/Register';
 import Login from './components/Login';
 import {Toaster} from 'react-hot-toast';
 import Skills from './components/Skills';
+import Roadmap from './components/Roadmap';
+import Projects from './components/Project';
+import Brief from './components/brief';
 
 const App = () => {
   return (
@@ -14,7 +17,9 @@ const App = () => {
        <Route path='/login' element={<Login/>}/>
        <Route path='/register' element={<Register/>}/>
         <Route path='/skills' element={<Skills/>}/>
-
+        <Route path='/roadmap' element={<Roadmap/>}/>
+        <Route path='/project' element={<Projects/>}/>
+        <Route path='/inBrief' element={<Brief/>}/>
       </Routes>
       <Toaster/>
     </div>

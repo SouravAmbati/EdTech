@@ -4,8 +4,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { gemini, roadmap } from "../services/gemini.js";
 
-
-
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
 };
@@ -114,13 +112,14 @@ const getRegisterSkills = async (req, res) => {
     return res.json(GetUserSkills);
   } catch (error) {}
 };
+
 const SendAi = async (req, res) => {
   try {
     const { content, userId } = req.body;
     if (!content) {
       return res.json({ message: "Content Is Not Added" });
     }
-    const answer = await roadmap(content)
+    const answer = await roadmap(content);
     if (!answer) {
       return res.json({
         success: false,
@@ -132,41 +131,39 @@ const SendAi = async (req, res) => {
       { $set: { roadmap: answer } },
       { new: true }
     );
-    return res.json({ updatedUser });
+    return res.json({ roadmap: answer, updatedUser });
   } catch (error) {
     console.log(error);
   }
 };
 
-const projectAi=async(req,res)=>{
-    try {
-        //req project from the body
-        const {data}=req.body;
-        const {userId}=req.body;
-        if(!data){
-            return res.json({message:"Data is not sent"})
-        }
-        //send the data to Ai
-        const answer=await gemini(data)
-        if(!answer){
-           return res.json({
-                success:false,
-                message:"Due To Some Server Issue Projects Cant Be Loaded"
-           })
-        }
-        const updatedUser=await userModel.findByIdAndUpdate(
-            userId,
-            {$set:{projects:answer}},
-            {new:true}
-        )
-        return res.json({updatedUser});
-        
-    } catch (error) {
-        console.log(error);
-        
+const projectAi = async (req, res) => {
+  try {
+    //req project from the body
+    const { data } = req.body;
+    const { userId } = req.body;
+    if (!data) {
+      return res.json({ message: "Data is not sent" });
     }
-}
-
+    //send the data to Ai
+    const answer = await gemini(data);
+    if (!answer) {
+      return res.json({
+        success: false,
+        message: "Due To Some Server Issue Projects Cant Be Loaded",
+      });
+    }
+    const updatedUser = await userModel.findByIdAndUpdate(
+      userId,
+      { $set: { projects: answer } },
+      { new: true }
+    );
+    // return res.json({updatedUser});
+    return res.json({ projects: answer, updatedUser });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // export { Registeruser, Loginuser, RegisterSkills, getRegisterSkills, SendAi  };
 export {
@@ -175,5 +172,5 @@ export {
   RegisterSkills,
   getRegisterSkills,
   SendAi,
-  projectAi
+  projectAi,
 };
